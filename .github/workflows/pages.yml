@@ -1,0 +1,57 @@
+name: Обновить отчёт и сайт
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1-5"
+      timezone: "Europe/Minsk"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      AMOCRM_SUBDOMAIN: ${{ secrets.AMOCRM_SUBDOMAIN }}
+      AMOCRM_TOKEN: ${{ secrets.AMOCRM_TOKEN }}
+      AMOCRM_API_BASE: ${{ secrets.AMOCRM_API_BASE }}
+    steps:
+      - name: Забрать репозиторий
+        uses: actions/checkout@v6
+
+      - name: Подготовить Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Обновить данные из amoCRM
+        if: env.AMOCRM_TOKEN != '' && (env.AMOCRM_SUBDOMAIN != '' || env.AMOCRM_API_BASE != '')
+        run: node scripts/build_report_site.js
+
+      - name: Использовать текущий отчёт, пока секреты не настроены
+        if: env.AMOCRM_TOKEN == '' || (env.AMOCRM_SUBDOMAIN == '' && env.AMOCRM_API_BASE == '')
+        run: echo "Секреты amoCRM пока не добавлены — публикуем сохранённый отчёт."
+
+      - name: Настроить GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Подготовить сайт к публикации
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+      - name: Опубликовать
+        id: deployment
+        uses: actions/deploy-pages@v4

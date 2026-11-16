@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<style>
+  /* Отчет для Ильи: колонка текста, карточки по людям, две таблицы */
+  :root {
+    --bg: #fafaf8; --panel: #ffffff; --fg: #1d1f24; --muted: #6b6f78; --line: #e4e4df;
+    --c1: #3b5bdb; --c2: #0c8f8a; --c3: #c2570c;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15171b; --panel: #1d2026; --fg: #eceef2; --muted: #9aa0ab; --line: #2e323a;
+      --c1: #7b93f0; --c2: #3cc2bb; --c3: #f08a4b; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid; gap: 36px; }
+  .head { display: grid; gap: 8px; }
+  h1 { margin: 0; font: 400 2.4rem/1.15 var(--serif); text-wrap: balance; }
+  .sub { margin: 0; color: var(--muted); font-size: 13px; }
+  .lead { margin: 6px 0 0; font-size: 17px; max-width: 62ch; }
+  .lead b { font-variant-numeric: tabular-nums; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  @media (max-width: 600px) { .tiles { grid-template-columns: 1fr; } h1 { font-size: 1.9rem; } }
+  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 6px; }
+  .who { font-size: 12px; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+  .big { font: 400 2.8rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+  .cap { font-size: 13px; color: var(--muted); }
+  .cap b { color: var(--fg); font-weight: 500; }
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; display: grid; gap: 6px; }
+  .note p { margin: 0; max-width: 72ch; }
+  section { display: grid; gap: 10px; }
+  h2 { margin: 0; font-size: 19px; font-weight: 600; }
+  .hint { margin: 0; color: var(--muted); font-size: 13px; max-width: 72ch; }
+  .wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  th, td { padding: 11px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  tbody tr:last-child td { border-bottom: 0; }
+  thead th { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .num { text-align: right; width: 86px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .metric { font-weight: 500; white-space: nowrap; }
+  .desc { color: var(--muted); font-size: 13px; min-width: 220px; }
+  .zero { color: var(--muted); opacity: .55; }
+  .bar { display: block; height: 3px; margin: 6px 0 0 auto; border-radius: 2px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  details summary:focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
+  details ul { margin: 10px 0 0; padding-left: 1.2em; display: grid; gap: 4px; color: var(--muted); font-size: 13px; max-width: 72ch; }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="head">
+    <h1>{{TITLE}}</h1>
+    <p class="sub">{{PEOPLE_TEXT}} · воронка «Аутбаунд» в amoCRM, разбивка по полю «Ньюбиз»</p>
+    <p class="lead">За период команда завела <b id="new-total"></b> новых контактов и продолжила работу еще с <b id="cont-total"></b> контактами из прошлых месяцев.</p>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <aside class="note">
+    <span class="who">Про КП</span>
+    <p>«Демо / КП / первичная квалификация» — один общий этап. КП здесь не формальный документ, а первый ориентир: сориентировали клиента по стоимости или накинули предложение текстом в телеграме. Демо — проба идеи, чаще у цифрового дизайна. Отдельно КП мы не считаем, они входят в этот этап.</p>
+  </aside>
+
+  <section>
+    <h2>Активность</h2>
+    <p class="hint">Встречи и звонки посчитаны по тексту заметок в карточках, это оценка.</p>
+    <div class="wrap"><table>
+      <thead><tr><th>Метрика</th><th>Что значит</th>{{OWNER_HEADERS}}</tr></thead>
+      <tbody id="activity"></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Переходы по этапам</h2>
+    <p class="hint">Сколько карточек перешли на этап за период. Одна карточка могла пройти несколько этапов, поэтому строки между собой не складываются.</p>
+    <div class="wrap"><table>
+      <thead><tr><th>Этап</th><th>Что значит</th>{{OWNER_HEADERS}}</tr></thead>
+      <tbody id="stages"></tbody>
+    </table></div>
+  </section>
+
+  <details>
+    <summary>Как считали</summary>
+    <ul>
+      <li>{{DATA_NOTE}}</li>
+      <li>Кто ведет контакт, определяется полем «Ньюбиз» в карточке.</li>
+      <li>Новые контакты — карточки, созданные в периоде. Продолжающиеся — созданные раньше, с заметкой или сменой этапа в периоде. Закрытые карточки тоже учитываются.</li>
+      <li>Переход на этап и обратно в течение 10 минут считается случайным кликом и не засчитывается.</li>
+      <li>Две карточки, где контакт добывали лидеры юнитов, а не ньюбиз, в цифры не входят.</li>
+    </ul>
+  </details>
+</main>
+
+<script>
+  // Снимок данных отчета: {{SNAPSHOT_DATE}}
+  const ROWS = {{ROWS_JSON}};
+  const PEOPLE = {{PEOPLE_JSON}};
+  const COLORS = ["var(--c1)", "var(--c2)", "var(--c3)"];
+  const row = (m) => ROWS.find((r) => r[1] === m);
+  const sum = (r) => r.slice(3).reduce((total, value) => total + value, 0);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  document.getElementById("new-total").textContent = sum(row("Новые контакты"));
+  document.getElementById("cont-total").textContent = sum(row("Продолжающиеся контакты"));
+
+  const tiles = document.getElementById("tiles");
+  PEOPLE.forEach((p, i) => {
+    const t = el("div", "tile");
+    t.append(el("span", "who", p + " · новые контакты"), el("span", "big", row("Новые контакты")[3 + i]));
+    const cap = el("span", "cap", "продолжающихся: ");
+    cap.append(el("b", null, row("Продолжающиеся контакты")[3 + i]));
+    t.append(cap);
+    tiles.append(t);
+  });
+
+  function fill(id, group) {
+    const rows = ROWS.filter((r) => r[0] === group);
+    const max = Math.max(1, ...rows.flatMap((r) => r.slice(3)));
+    document.getElementById(id).append(...rows.map((r) => {
+      const tr = el("tr");
+      tr.append(el("td", "metric", r[1]), el("td", "desc", r[2]));
+      r.slice(3).forEach((v, i) => {
+        const td = el("td", "num");
+        td.append(el("span", v === 0 ? "zero" : null, v));
+        if (group === "stage" && v > 0) {
+          const bar = el("span", "bar");
+          bar.style.width = Math.max(4, Math.round((v / max) * 64)) + "px";
+          bar.style.background = COLORS[i % COLORS.length];
+          td.append(bar);
+        }
+        tr.append(td);
+      });
+      return tr;
+    }));
+  }
+  fill("activity", "activity");
+  fill("stages", "stage");
+</script>
+</body>
+</html>
