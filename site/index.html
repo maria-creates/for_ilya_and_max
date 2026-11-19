@@ -1,152 +1,400 @@
 <!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<title>Аутбаунд: 1–16 ноября</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Касания Q4 — Аутбаунд Pragmatica</title>
 <style>
-  /* Отчет для Ильи: колонка текста, карточки по людям, две таблицы */
-  :root {
-    --bg: #fafaf8; --panel: #ffffff; --fg: #1d1f24; --muted: #6b6f78; --line: #e4e4df;
-    --c1: #3b5bdb; --c2: #0c8f8a; --c3: #c2570c;
-    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #15171b; --panel: #1d2026; --fg: #eceef2; --muted: #9aa0ab; --line: #2e323a;
-      --c1: #7b93f0; --c2: #3cc2bb; --c3: #f08a4b; color-scheme: dark; }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
-  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-    display: grid; gap: 36px; }
-  .head { display: grid; gap: 8px; }
-  h1 { margin: 0; font: 400 2.4rem/1.15 var(--serif); text-wrap: balance; }
-  .sub { margin: 0; color: var(--muted); font-size: 13px; }
-  .lead { margin: 6px 0 0; font-size: 17px; max-width: 62ch; }
-  .lead b { font-variant-numeric: tabular-nums; }
-  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-  @media (max-width: 600px) { .tiles { grid-template-columns: 1fr; } h1 { font-size: 1.9rem; } }
-  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 6px; }
-  .who { font-size: 12px; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
-  .big { font: 400 2.8rem/1 var(--serif); font-variant-numeric: tabular-nums; }
-  .cap { font-size: 13px; color: var(--muted); }
-  .cap b { color: var(--fg); font-weight: 500; }
-  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; display: grid; gap: 6px; }
-  .note p { margin: 0; max-width: 72ch; }
-  section { display: grid; gap: 10px; }
-  h2 { margin: 0; font-size: 19px; font-weight: 600; }
-  .hint { margin: 0; color: var(--muted); font-size: 13px; max-width: 72ch; }
-  .wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
-  table { width: 100%; border-collapse: collapse; min-width: 640px; }
-  th, td { padding: 11px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
-  tbody tr:last-child td { border-bottom: 0; }
-  thead th { font-size: 12px; color: var(--muted); font-weight: 500; }
-  .num { text-align: right; width: 86px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .metric { font-weight: 500; white-space: nowrap; }
-  .desc { color: var(--muted); font-size: 13px; min-width: 220px; }
-  .zero { color: var(--muted); opacity: .55; }
-  .bar { display: block; height: 3px; margin: 6px 0 0 auto; border-radius: 2px; }
-  details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
-  details summary:focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
-  details ul { margin: 10px 0 0; padding-left: 1.2em; display: grid; gap: 4px; color: var(--muted); font-size: 13px; max-width: 72ch; }
+:root {
+--cds-gap-xs:6px;--cds-gap-sm:12px;--cds-gap-md:18px;--cds-gap-xl:36px;
+--cds-pad-xs:10px;--cds-pad-sm:12px;--cds-pad-md:16px;--cds-pad-lg:20px;
+--cds-radius:12px;--cds-font-size-title:clamp(30px,5vw,46px);--cds-font-size-heading:22px;--cds-font-size-caption:13px;--cds-font-weight-medium:600;
+--font-anthropic-serif:Georgia,'Times New Roman',serif;--font-anthropic-sans:system-ui,-apple-system,'Segoe UI',sans-serif;
+--color-fg:#232822;--color-fg-muted:#687066;--color-panel:#fff;--color-border-line:#dce1d9;
+--cds-text-secondary:var(--color-fg-muted);--cds-surface-popover:#fff;--cds-border:var(--color-border-line);--cds-shadow-popover:0 6px 24px #0002;--cds-chart-grid:#e1e5dd;--cds-chart-axis:#b7c0b3;--cds-chart-reference:#919d8b;
+color-scheme:light;
+}
+*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--color-fg);font:16px/1.5 var(--font-anthropic-sans)}
+.q4{max-width:1160px;margin:0 auto;padding:40px 24px 60px}.dash-select{font:inherit;color:inherit;background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:8px;padding:8px 12px;max-width:100%}
+:focus-visible{outline:2px solid #4c7154;outline-offset:4px}.q4-chart svg{display:block}th{vertical-align:bottom}
+@media(max-width:600px){.q4{padding:24px 16px 40px}.q4-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.q4-tile:last-child{grid-column:1/-1}}
+</style></head><body>
+<meta name="dash-one-writer">
+<style>
+.q4 { display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+.q4-head { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.q4-h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.q4-lead { color: var(--color-fg-muted); margin: 0; max-width: 65ch; }
+.q4-lead b { color: var(--color-fg); font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; }
+.q4-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+.q4-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.q4-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.q4-num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.25rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.q4-split { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; display: flex; flex-wrap: wrap; gap: 0 var(--cds-gap-sm); }
+.q4-split b { color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+.q4-section { display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; }
+.q4-section-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--cds-gap-sm); }
+.q4-h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.q4-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.q4-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.q4-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.q4-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.q4-chart { position: relative; min-height: 290px; }
+.q4-chart text { font-size: var(--cds-font-size-caption); fill: var(--cds-text-secondary); font-family: var(--font-anthropic-sans); }
+.q4-chart text.q4-total { fill: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+.q4-chart text.q4-month { fill: var(--color-fg-muted); }
+.q4-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; white-space: nowrap; z-index: 2; }
+.q4-tip strong { display: block; margin-bottom: 2px; }
+.q4-table-wrap { overflow-x: auto; }
+.q4-table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.q4-table th, .q4-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); text-align: right; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.q4-table th:first-child, .q4-table td:first-child { text-align: left; }
+.q4-table th { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+.q4-notes summary { cursor: pointer; color: var(--color-fg-muted); }
+.q4-notes ul { margin: var(--cds-gap-sm) 0 0; padding-left: 1.2em; color: var(--color-fg-muted); max-width: 70ch; display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
 </style>
-</head>
-<body>
-<main class="page">
-  <header class="head">
-    <h1>Аутбаунд: 1–16 ноября</h1>
-    <p class="sub">Маша, Лиза и Саша · воронка «Аутбаунд» в amoCRM, разбивка по полю «Ньюбиз»</p>
-    <p class="lead">За период команда завела <b id="new-total"></b> новых контактов и продолжила работу еще с <b id="cont-total"></b> контактами из прошлых месяцев.</p>
+
+<div class="q4" data-read lang="ru">
+  <header class="q4-head" id="q4-head">
+    <h1 class="q4-h1">Касания Q4 — Аутбаунд</h1>
+    <p class="q4-lead">1 октября — 19 ноября 2026. Новых контактов — <b data-draw="leadNew" data-source="qtotal" data-field="new" data-row="0">—</b>, передано команде — <b data-draw="leadHanded" data-source="qtotal" data-field="handed" data-row="0">—</b>.</p>
   </header>
 
-  <div class="tiles" id="tiles"></div>
-
-  <aside class="note">
-    <span class="who">Про КП</span>
-    <p>«Демо / КП / первичная квалификация» — один общий этап. КП здесь не формальный документ, а первый ориентир: сориентировали клиента по стоимости или накинули предложение текстом в телеграме. Демо — проба идеи, чаще у цифрового дизайна. Отдельно КП мы не считаем, они входят в этот этап.</p>
-  </aside>
-
-  <section>
-    <h2>Активность</h2>
-    <p class="hint">Встречи и звонки посчитаны по тексту заметок в карточках, это оценка.</p>
-    <div class="wrap"><table>
-      <thead><tr><th>Метрика</th><th>Что значит</th><th class="num">Маша</th><th class="num">Лиза</th><th class="num">Саша</th></tr></thead>
-      <tbody id="activity"></tbody>
-    </table></div>
+  <section class="q4-tiles" id="q4-quarter" aria-label="Итоги квартала">
+    <div class="q4-tile" id="tile-new">
+      <span class="q4-tile-label">Новые контакты</span>
+      <span class="q4-num" data-draw="tNew" data-source="qtotal" data-field="new" data-row="0">—</span>
+      <span class="q4-split" data-draw="split" data-metric="new"></span>
+    </div>
+    <div class="q4-tile" id="tile-continuing">
+      <span class="q4-tile-label">Продолжающиеся</span>
+      <span class="q4-num" data-draw="tCont" data-source="qtotal" data-field="continuing" data-row="0">—</span>
+      <span class="q4-split" data-draw="split" data-metric="continuing"></span>
+    </div>
+    <div class="q4-tile" id="tile-wait">
+      <span class="q4-tile-label">Ждём задачу</span>
+      <span class="q4-num" data-draw="tWait" data-source="qtotal" data-field="wait_task" data-row="0">—</span>
+      <span class="q4-split" data-draw="split" data-metric="wait_task"></span>
+    </div>
+    <div class="q4-tile" id="tile-demo">
+      <span class="q4-tile-label">Демо / КП / квалификация</span>
+      <span class="q4-num" data-draw="tDemo" data-source="qtotal" data-field="demo_kp" data-row="0">—</span>
+      <span class="q4-split" data-draw="split" data-metric="demo_kp"></span>
+    </div>
+    <div class="q4-tile" id="tile-handed">
+      <span class="q4-tile-label">Передано команде</span>
+      <span class="q4-num" data-draw="tHanded" data-source="qtotal" data-field="handed" data-row="0">—</span>
+      <span class="q4-split" data-draw="split" data-metric="handed"></span>
+    </div>
   </section>
 
-  <section>
-    <h2>Переходы по этапам</h2>
-    <p class="hint">Сколько карточек перешли на этап за период. Одна карточка могла пройти несколько этапов, поэтому строки между собой не складываются.</p>
-    <div class="wrap"><table>
-      <thead><tr><th>Этап</th><th>Что значит</th><th class="num">Маша</th><th class="num">Лиза</th><th class="num">Саша</th></tr></thead>
-      <tbody id="stages"></tbody>
-    </table></div>
+  <section class="q4-section" id="q4-months">
+    <h2 class="q4-h2">По месяцам</h2>
+    <div class="q4-table-wrap">
+      <table class="q4-table" data-source="mtotal" data-row-key="month">
+        <thead><tr>
+          <th data-field="month">Месяц</th>
+          <th data-field="new">Новые</th>
+          <th data-field="continuing">Продолжающиеся</th>
+          <th data-field="wait_task">Ждём задачу</th>
+          <th data-field="demo_kp">Демо / КП</th>
+          <th data-field="handed">Передано</th>
+        </tr></thead>
+        <tbody data-draw="months"></tbody>
+      </table>
+    </div>
   </section>
 
-  <details>
-    <summary>Как считали</summary>
+  <section class="q4-section" id="q4-weeks">
+    <div class="q4-section-head">
+      <h2 class="q4-h2">По неделям</h2>
+      <select class="dash-select" id="q4-metric" aria-label="Показатель">
+        <option value="new">Новые контакты</option>
+        <option value="continuing">Продолжающиеся</option>
+        <option value="wait_task">Ждём задачу</option>
+        <option value="demo_kp">Демо / КП / квалификация</option>
+        <option value="handed">Передано команде</option>
+      </select>
+    </div>
+    <div class="q4-legend" data-draw="legend"></div>
+    <div class="q4-chart" id="q4-chart" data-draw="chart" data-source="weeks"></div>
+    <p class="q4-note">Нажмите на неделю, чтобы увидеть разбивку ниже.</p>
+  </section>
+
+  <section class="q4-section" id="q4-week-detail">
+    <h2 class="q4-h2">Неделя <span data-draw="weektitle">—</span></h2>
+    <div class="q4-table-wrap">
+      <table class="q4-table" data-source="weeks" data-row-key="week_start,newbiz">
+        <thead><tr>
+          <th data-field="newbiz">Ньюбиз</th>
+          <th data-field="new">Новые</th>
+          <th data-field="continuing">Продолжающиеся</th>
+          <th data-field="wait_task">Ждём задачу</th>
+          <th data-field="demo_kp">Демо / КП</th>
+          <th data-field="handed">Передано</th>
+        </tr></thead>
+        <tbody data-draw="weekdetail"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details class="q4-notes" id="q4-notes">
+    <summary>Как считается</summary>
     <ul>
-      <li>Данные выгружены из amoCRM 16.11.2026, период 1–16 ноября включительно.</li>
-      <li>Кто ведет контакт, определяется полем «Ньюбиз» в карточке.</li>
-      <li>Новые контакты — карточки, созданные в периоде. Продолжающиеся — созданные раньше, с заметкой или сменой этапа в периоде. Закрытые карточки тоже учитываются.</li>
-      <li>Переход на этап и обратно в течение 10 минут считается случайным кликом и не засчитывается.</li>
-      <li>Две карточки, где контакт добывали лидеры юнитов, а не ньюбиз, в цифры не входят.</li>
+      <li>Новые контакты — карточки воронки «Аутбаунд», заведённые в периоде.</li>
+      <li>Продолжающиеся — карточки, заведённые раньше периода, в которых в периоде была заметка или смена этапа. Поэтому за квартал это только контакты, заведённые до 1 октября, а сумма по неделям больше квартальной: одна карточка считается в каждой неделе, где было касание.</li>
+      <li>Ждём задачу, Демо / КП / квалификация, Передано команде — сколько карточек перешли на этот этап в периоде. Переход туда-обратно за 10 минут не считается.</li>
+      <li>Карточки, закрытые с причиной «Подхватила команда», не учитываются.</li>
+      <li>Кто ведёт контакт — поле «Ньюбиз» на момент выгрузки.</li>
+      <li>Недели — с понедельника по воскресенье, на границах периода обрезаются. Неделя 26 октября — 1 ноября отнесена к октябрю. Месячные итоги считаются по календарным месяцам.</li>
+      <li>Цифры — снимок amoCRM на 19 ноября 2026, обновляются новой выгрузкой.</li>
     </ul>
   </details>
-</main>
+</div>
 
+<script src="vendor/d3.min.js"></script>
+<script src="data.js"></script>
 <script>
-  // Снимок данных отчета: 16.11.2026
-  const ROWS = [["activity","Новые контакты","Карточки, заведенные в периоде",11,10,9],["activity","Продолжающиеся контакты","Заведены раньше, в периоде было касание: заметка или смена этапа",22,0,0],["activity","Заметки","Все примечания в карточках за период",44,0,2],["activity","Встречи (по заметкам)","Встреча договорена или прошла (оценка по тексту заметок)",2,0,0],["activity","Звонки (по заметкам)","Созвон или демо прошли (оценка по тексту заметок)",1,0,0],["stage","Аутрич, Потеплить","Написали первое сообщение",4,5,6],["stage","Илье на оффлайн","Нужна личная встреча или знакомство через Илью",11,0,0],["stage","Общаемся","Контакт ответил, завязался теплый диалог: подключает внешние команды или готов нас рассмотреть, но пока неясно, под какую задачу и когда",6,1,1],["stage","Ждем задачу","Клиент пообещал конкретный шаг: прислать план задач, позвать в тендер",3,1,0],["stage","Демо / КП / первичная квалификация","Дали первые ориентиры, клиент готов обсуждать дальше. КП — не документ, а ориентир по стоимости или предложение текстом в тг; демо — проба идеи, чаще у ЦД",0,0,0],["stage","Передано команде","Дали первые ориентиры, клиент готов обсуждать дальше, запрос передали команде",2,0,0],["stage","Вернуться позже","Контакт теплый, но в ближайшие три недели повода продолжать нет",6,3,2],["stage","Успешно реализовано","Сделка состоялась",1,0,0],["stage","Нереализовано","Диалог заглох или внешние команды не подключают либо планируют не раньше середины следующего года; раз в квартал проверяем повод",13,1,0]];
-  const PEOPLE = ["Маша","Лиза","Саша"];
-  const COLORS = ["var(--c1)", "var(--c2)", "var(--c3)"];
-  const row = (m) => ROWS.find((r) => r[1] === m);
-  const sum = (r) => r.slice(3).reduce((total, value) => total + value, 0);
-  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+(() => {
+ const sources = new Map(Object.entries(window.Q4_DATA || {}).map(([k,v]) => [k,{status:'ok',data:v}]));
+ const draws = new Map();
+ window.dash = {
+  colors: ['#496c50','#b38c48','#7a83a4'],
+  data: name => sources.get(name) || {status:'error',data:[]},
+  calc(name, spec) { sources.set(name,{status:'ok',data:spec.fn(...spec.inputs.map(k=>sources.get(k)?.data || []))}); },
+  draw(name, fn) { if(fn) { draws.set(name,fn); return; } document.querySelectorAll('[data-draw="'+name+'"]').forEach(el=>draws.get(name)?.(el)); },
+  render() { draws.forEach((fn,name)=>this.draw(name)); }
+ };
+ window.addEventListener('DOMContentLoaded',()=>dash.render());
+ let timer;
+ window.addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(()=>dash.draw('chart'),100);});
+})();
+</script>
+<script>
+window.q4 = window.q4 || { metric: 'new', week: null };
+window.q4.people = ['Маша', 'Лиза', 'Саша'];
+window.q4.labels = { new: 'Новые контакты', continuing: 'Продолжающиеся', wait_task: 'Ждём задачу', demo_kp: 'Демо / КП / квалификация', handed: 'Передано команде' };
 
-  document.getElementById("new-total").textContent = sum(row("Новые контакты"));
-  document.getElementById("cont-total").textContent = sum(row("Продолжающиеся контакты"));
+dash.calc('qtotal', {
+  inputs: ['quarter'],
+  title: 'Итого за квартал',
+  description: 'Сумма по Маше, Лизе и Саше',
+  fn: (quarter) => [{
+    new: d3.sum(quarter, (r) => +r.new),
+    continuing: d3.sum(quarter, (r) => +r.continuing),
+    wait_task: d3.sum(quarter, (r) => +r.wait_task),
+    demo_kp: d3.sum(quarter, (r) => +r.demo_kp),
+    handed: d3.sum(quarter, (r) => +r.handed),
+  }],
+});
 
-  const tiles = document.getElementById("tiles");
-  PEOPLE.forEach((p, i) => {
-    const t = el("div", "tile");
-    t.append(el("span", "who", p + " · новые контакты"), el("span", "big", row("Новые контакты")[3 + i]));
-    const cap = el("span", "cap", "продолжающихся: ");
-    cap.append(el("b", null, row("Продолжающиеся контакты")[3 + i]));
-    t.append(cap);
-    tiles.append(t);
+dash.calc('mtotal', {
+  inputs: ['months'],
+  title: 'Итого по месяцам',
+  description: 'Сумма по Маше, Лизе и Саше за каждый месяц',
+  fn: (months) => d3.groups(months, (r) => r.month).map(([month, rows]) => ({
+    month,
+    new: d3.sum(rows, (r) => +r.new),
+    continuing: d3.sum(rows, (r) => +r.continuing),
+    wait_task: d3.sum(rows, (r) => +r.wait_task),
+    demo_kp: d3.sum(rows, (r) => +r.demo_kp),
+    handed: d3.sum(rows, (r) => +r.handed),
+  })),
+});
+
+function q4Num(name, field) {
+  dash.draw(name, (el) => {
+    const d = dash.data('qtotal');
+    el.textContent = d.status === 'ok' && d.data && d.data[0] ? String(d.data[0][field]) : '—';
+  });
+}
+q4Num('leadNew', 'new');
+q4Num('leadHanded', 'handed');
+q4Num('tNew', 'new');
+q4Num('tCont', 'continuing');
+q4Num('tWait', 'wait_task');
+q4Num('tDemo', 'demo_kp');
+q4Num('tHanded', 'handed');
+
+dash.draw('split', (el) => {
+  const d = dash.data('quarter');
+  el.replaceChildren();
+  if (d.status !== 'ok') return;
+  const m = el.dataset.metric;
+  window.q4.people.forEach((p) => {
+    const r = d.data.find((x) => x.newbiz === p);
+    const s = document.createElement('span');
+    s.append(p + ' ');
+    const b = document.createElement('b');
+    b.dataset.source = 'quarter';
+    b.dataset.field = m;
+    b.dataset.where = 'newbiz=' + encodeURIComponent(p);
+    b.textContent = r ? String(+r[m]) : '0';
+    s.append(b);
+    el.append(s);
+  });
+});
+
+dash.draw('months', (tb) => {
+  const d = dash.data('mtotal');
+  tb.replaceChildren();
+  if (d.status !== 'ok' || !d.data) return;
+  d.data.forEach((r) => {
+    const tr = document.createElement('tr');
+    ['month', 'new', 'continuing', 'wait_task', 'demo_kp', 'handed'].forEach((k) => {
+      const td = document.createElement('td');
+      td.textContent = String(r[k]);
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+dash.draw('legend', (el) => {
+  el.replaceChildren();
+  window.q4.people.forEach((p, i) => {
+    const s = document.createElement('span');
+    const sw = document.createElement('i');
+    sw.style.background = dash.colors[i];
+    s.append(sw, p);
+    el.append(s);
+  });
+});
+
+function q4Weeks() {
+  const d = dash.data('weeks');
+  if (d.status !== 'ok') return null;
+  return d3.groups(d.data, (r) => r.week_start).map(([start, rows]) => ({ start, label: rows[0].week, month: rows[0].month, rows }));
+}
+
+dash.draw('chart', (el) => {
+  const d = dash.data('weeks');
+  el.replaceChildren();
+  if (d.status !== 'ok') {
+    el.textContent = d.status === 'error' ? 'Не загрузилось' : '—';
+    return;
+  }
+  const people = window.q4.people;
+  const m = window.q4.metric;
+  const weeks = q4Weeks().map((w) => {
+    let y = 0;
+    const parts = people.map((p) => {
+      const r = w.rows.find((x) => x.newbiz === p);
+      const v = r ? +r[m] : 0;
+      const part = { p, v, y0: y };
+      y += v;
+      return part;
+    });
+    return { ...w, parts, total: y };
+  });
+  if (!weeks.length) { el.textContent = 'За период нет данных'; return; }
+  if (!window.q4.week || !weeks.some((w) => w.start === window.q4.week)) window.q4.week = weeks[weeks.length - 1].start;
+
+  const W = Math.max(280, el.clientWidth || 600);
+  const H = 290, mt = 22, mb = 52, ml = 4, mr = 4;
+  const svg = d3.select(el).append('svg')
+    .attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', `${window.q4.labels[m]} по неделям, с разбивкой по ньюбизам`);
+  const x = d3.scaleBand().domain(weeks.map((w) => w.start)).range([ml, W - mr]).paddingInner(0.25).paddingOuter(0.1);
+  const ymax = d3.max(weeks, (w) => w.total) || 1;
+  const y = d3.scaleLinear().domain([0, ymax]).nice().range([H - mb, mt]);
+
+  svg.append('g').selectAll('line').data(y.ticks(4).filter((t) => t > 0)).join('line')
+    .attr('x1', ml).attr('x2', W - mr).attr('y1', (t) => y(t)).attr('y2', (t) => y(t))
+    .style('stroke', 'var(--cds-chart-grid)');
+  svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
+
+  // month boundary
+  const firstNov = weeks.findIndex((w) => w.month !== weeks[0].month);
+  if (firstNov > 0) {
+    const bx = x(weeks[firstNov].start) - (x.step() - x.bandwidth()) / 2;
+    svg.append('line').attr('x1', bx).attr('x2', bx).attr('y1', mt - 10).attr('y2', H - 4)
+      .style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '3 3');
+  }
+  d3.groups(weeks, (w) => w.month).forEach(([month, ws]) => {
+    const x0 = x(ws[0].start), x1 = x(ws[ws.length - 1].start) + x.bandwidth();
+    svg.append('text').attr('class', 'q4-month').attr('x', (x0 + x1) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text(month);
   });
 
-  function fill(id, group) {
-    const rows = ROWS.filter((r) => r[0] === group);
-    const max = Math.max(1, ...rows.flatMap((r) => r.slice(3)));
-    document.getElementById(id).append(...rows.map((r) => {
-      const tr = el("tr");
-      tr.append(el("td", "metric", r[1]), el("td", "desc", r[2]));
-      r.slice(3).forEach((v, i) => {
-        const td = el("td", "num");
-        td.append(el("span", v === 0 ? "zero" : null, v));
-        if (group === "stage" && v > 0) {
-          const bar = el("span", "bar");
-          bar.style.width = Math.max(4, Math.round((v / max) * 64)) + "px";
-          bar.style.background = COLORS[i % COLORS.length];
-          td.append(bar);
-        }
-        tr.append(td);
-      });
-      return tr;
-    }));
-  }
-  fill("activity", "activity");
-  fill("stages", "stage");
+  const tip = document.createElement('div');
+  tip.className = 'q4-tip';
+  tip.hidden = true;
+  el.append(tip);
+
+  const short = x.bandwidth() < 58;
+  const g = svg.append('g').selectAll('g').data(weeks).join('g').style('cursor', 'pointer').attr('tabindex', 0).attr('role', 'button').attr('aria-label', w => w.label);
+  g.append('rect').attr('x', (w) => x(w.start) - (x.step() - x.bandwidth()) / 2).attr('width', x.step())
+    .attr('y', mt - 16).attr('height', H - mb - mt + 16).style('fill', 'transparent');
+  g.selectAll('rect.seg').data((w) => w.parts.filter((p) => p.v > 0).map((p) => ({ ...p, w }))).join('rect')
+    .attr('class', 'seg')
+    .attr('x', (s) => x(s.w.start)).attr('width', x.bandwidth())
+    .attr('y', (s) => y(s.y0 + s.v)).attr('height', (s) => Math.max(0, y(s.y0) - y(s.y0 + s.v)))
+    .style('fill', (s) => dash.colors[people.indexOf(s.p)])
+    .style('opacity', (s) => (s.w.start === window.q4.week ? 1 : 0.6));
+  g.append('text').attr('class', 'q4-total').attr('x', (w) => x(w.start) + x.bandwidth() / 2).attr('y', (w) => y(w.total) - 5)
+    .attr('text-anchor', 'middle').text((w) => w.total);
+  g.append('text').attr('x', (w) => x(w.start) + x.bandwidth() / 2).attr('y', H - mb + 16).attr('text-anchor', 'middle')
+    .style('font-weight', (w) => (w.start === window.q4.week ? 'var(--cds-font-weight-medium)' : null))
+    .style('fill', (w) => (w.start === window.q4.week ? 'var(--color-fg)' : null))
+    .text((w) => (short ? w.start.slice(8, 10) + '.' + w.start.slice(5, 7) : w.label));
+
+  g.on('keydown', (e, w) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.q4.week = w.start; dash.draw('chart'); dash.draw('weektitle'); dash.draw('weekdetail'); } });
+  g.on('click', (e, w) => {
+    window.q4.week = w.start;
+    dash.draw('chart');
+    dash.draw('weektitle');
+    dash.draw('weekdetail');
+  });
+  g.on('mousemove', (e, w) => {
+    tip.replaceChildren();
+    const h = document.createElement('strong');
+    h.textContent = w.label;
+    tip.append(h);
+    w.parts.forEach((p) => {
+      const line = document.createElement('div');
+      line.textContent = `${p.p}: ${p.v}`;
+      tip.append(line);
+    });
+    const tot = document.createElement('div');
+    tot.textContent = `Всего: ${w.total}`;
+    tip.append(tot);
+    tip.hidden = false;
+    const [px, py] = d3.pointer(e, el);
+    const tw = tip.offsetWidth;
+    tip.style.left = Math.min(Math.max(0, px + 12), el.clientWidth - tw) + 'px';
+    tip.style.top = Math.max(0, py - 10) + 'px';
+  });
+  g.on('mouseleave', () => { tip.hidden = true; });
+});
+
+dash.draw('weektitle', (el) => {
+  const ws = q4Weeks();
+  const w = ws && ws.find((x) => x.start === window.q4.week);
+  el.textContent = w ? w.label : '—';
+});
+
+dash.draw('weekdetail', (tb) => {
+  tb.replaceChildren();
+  const ws = q4Weeks();
+  const w = ws && ws.find((x) => x.start === window.q4.week);
+  if (!w) return;
+  window.q4.people.forEach((p) => {
+    const r = w.rows.find((x) => x.newbiz === p);
+    if (!r) return;
+    const tr = document.createElement('tr');
+    tr.dataset.key = encodeURIComponent(r.week_start) + ',' + encodeURIComponent(r.newbiz);
+    ['newbiz', 'new', 'continuing', 'wait_task', 'demo_kp', 'handed'].forEach((k) => {
+      const td = document.createElement('td');
+      td.textContent = String(r[k]);
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+});
+
+document.querySelectorAll('#q4-metric').forEach((sel) => {
+  sel.value = window.q4.metric;
+  sel.addEventListener('change', () => {
+    window.q4.metric = sel.value;
+    dash.draw('chart');
+  });
+});
 </script>
-</body>
-</html>
+
+</body></html>
