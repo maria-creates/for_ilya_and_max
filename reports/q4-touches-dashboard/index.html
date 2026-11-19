@@ -155,7 +155,7 @@ color-scheme:light;
  const sources = new Map(Object.entries(window.Q4_DATA || {}).map(([k,v]) => [k,{status:'ok',data:v}]));
  const draws = new Map();
  window.dash = {
-  colors: ['#6e879e','#b16f70','#c1aa62'],
+  colors: ['#000080','#0000ff','#008080'],
   data: name => sources.get(name) || {status:'error',data:[]},
   calc(name, spec) { sources.set(name,{status:'ok',data:spec.fn(...spec.inputs.map(k=>sources.get(k)?.data || []))}); },
   draw(name, fn) { if(fn) { draws.set(name,fn); return; } document.querySelectorAll('[data-draw="'+name+'"]').forEach(el=>draws.get(name)?.(el)); },
